@@ -1,3 +1,9 @@
+struct SensorData
+{
+    int light;
+    int sound;
+};
+
 const int LDR = A0;
 const int MIC = A1;
 const int VOL_BASELINE = 505;
@@ -14,29 +20,41 @@ int getSoundLevel()
     return deviation;
 }
 
-void loop() {
-    int totalVal = 0;
+SensorData readSensors()
+{
+    SensorData data;
+
+    int totalLightVal = 0;
     for (int i = 0; i < 10; i++)
     {
-        totalVal += analogRead(LDR);
+        totalLightVal += analogRead(LDR);
     }
-    delay(200);
-    Serial.print("Light: ");
-    Serial.println(totalVal/10);
+    data.light = totalLightVal/10;
 
-    int totalDev = 0;
+    int totalSoundDev = 0;
     for (int i = 0; i < 100; i++)
     {
-        totalDev += getSoundLevel();
+        totalSoundDev += getSoundLevel();
     }
-    Serial.print("Sound: ");
-    Serial.println(totalDev/100);
-    delay(1000);
+    data.sound = totalSoundDev/100;
+
+    return data;
 }
 
 
 
+void loop()
+{
+    SensorData data = readSensors();
 
+    Serial.print("Light: ");
+    Serial.println(data.light);
+
+    Serial.print("Sound: ");
+    Serial.println(data.sound);
+
+    delay(1000);
+}
 
 
 
