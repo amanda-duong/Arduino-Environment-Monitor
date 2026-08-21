@@ -35,7 +35,7 @@ def update(frame):
 
         graph2.clear()
         graph2.plot(times, lightData)
-        graph2.set_ylim(0,800)
+        graph2.set_ylim(0,1000)
         graph2.set_xlabel("Time (seconds)")
         graph2.set_ylabel("Light Level (ADC)")
         graph2.set_title("Live Light Level")
