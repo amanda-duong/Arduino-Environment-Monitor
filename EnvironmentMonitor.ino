@@ -1,5 +1,8 @@
+// This file includes code that dictates the program/project flow (sensor reading, data output, and data transmission)
+
 #include "SensorData.h"
 
+// Initialize serial communication and LEDs as outputs
 void setup()
 {
     Serial.begin(9600);
@@ -10,8 +13,11 @@ void setup()
 
 void loop()
 {
+    // Read sensor data
     SensorData data = readSensors();
 
+    // Serial dashboard that includes digital/numerical sensor readings, LED status, written 
+    // description of environment, and data to be passed to Python program
     Serial.println("=====================================================");
     Serial.println("                ENVIRONMENT MONITOR");
     Serial.println("=====================================================");
